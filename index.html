@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!--
+  HTML shell of the WEB build (`expo export --platform web`, web.output "single"). Expo CLI
+  reads public/index.html as the template for the single-page output (webTemplate.js
+  getTemplateIndexHtmlAsync) and fills the LANG_ISO_CODE placeholder from app.json web.lang and the
+  WEB_TITLE one from the app name (first occurrence only — do not repeat them in this comment). `app/+html.tsx` is NOT used in "single" mode — it belongs to static rendering.
+
+  Direction on web: react-native-web's I18nManager is a stub (allowRTL/forceRTL are no-ops,
+  getConstants().isRTL is always false — node_modules/react-native-web/dist/exports/I18nManager/
+  index.js), so the native forceRTL mechanism in app/_layout.tsx cannot mirror anything here.
+  On web the layout engine is CSS: dir="rtl" on the html element is what makes flexDirection:'row',
+  marginStart/End, alignSelf:'flex-start' and textAlign:'start' resolve from the right edge.
+  It is set once, here, from the APP language (Hebrew-only), never from the browser locale —
+  the same rule as native.
+-->
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover" />
+    <title>BuildOS</title>
+    <!-- react-native-web style reset (https://necolas.github.io/react-native-web/docs/setup/#root-element),
+         plus a phone-width frame: the preview is opened on desktops too, and a 430px column keeps the
+         proportions of a phone. On a phone browser the cap never kicks in. -->
+    <style id="expo-reset">
+      html, body { height: 100%; margin: 0; background: #e9edf2; }
+      body { overflow: hidden; }
+      #root {
+        display: flex; flex: 1; height: 100%;
+        max-width: 430px; margin: 0 auto; background: #f5f7fa;
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 12px 40px rgba(16, 24, 40, 0.10);
+      }
+    </style>
+  <link rel="icon" href="/buildos-preview/favicon.ico"/></head>
+  <body>
+    <noscript>צריך להפעיל JavaScript כדי להריץ את BuildOS.</noscript>
+    <div id="root"></div>
+  <script src="/buildos-preview/_expo/static/js/web/entry-43a172c2b2fae7d15b02b2fdc58fbf8c.js" defer></script>
+</body>
+</html>
